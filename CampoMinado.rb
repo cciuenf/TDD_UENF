@@ -1,9 +1,12 @@
 # encoding: utf-8
 
-class Jogo
+class CampoMinado
 
+  def initialize (tamanho)
+    @tamanho = tamanho
+  end
 
-
+  attr_reader :tamanho
 
 
 end
