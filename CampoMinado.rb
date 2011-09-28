@@ -14,14 +14,18 @@ class CampoMinado
 
 
   def criaCampo()
-    for i in 0..@tamanho-1
-			for j in 0..@tamanho-1
-		    @bombas[i][j] = "#"
+
+    for linha in 0..@tamanho-1
+			for coluna in 0..@tamanho-1
+		    @bombas[linha][coluna] = "#"
 			end
 		end
 
   end
 
+  def adicionaBomba(linha,coluna)
+    @bombas[linha][coluna] = "*"
+  end
 
 
   attr_accessor :bombas

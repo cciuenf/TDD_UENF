@@ -21,6 +21,10 @@ describe CampoMinado do
     @jogo.bombas.should == [["#","#","#"],["#","#","#"],["#","#","#"]]
 	end
 
+  it 'testa se a bomba foi colocada no lugar certo' do
+    @jogo.adicionaBomba(1,1)
+    @jogo.bombas[1][1].should == "*"
+	end
 
 
 end
