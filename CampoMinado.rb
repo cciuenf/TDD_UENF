@@ -30,7 +30,3 @@ class CampoMinado
 
 end
 
-#teste = CampoMinado.new(3)
-#teste.criaCampo
-#p teste.bombas
-
