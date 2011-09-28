@@ -32,8 +32,22 @@ class CampoMinado
     if (@bombas[linha][coluna] == "*")
        @campo[linha][coluna] = "*"
     else
-       @campo[linha][coluna] = "V"
+       verificaBombasAoRedor(linha,coluna)
     end
+  end
+
+  def verificaBombasAoRedor(linha,coluna)
+    if (@campo[linha][coluna] == "#")
+    	@campo[linha][coluna] = 0
+
+      for i in -1..1
+			  for j in -1..1
+			    @campo[linha][coluna] += 1 if (@bombas[linha+i][coluna+j] == "*")
+        end
+      end
+
+		end
+    @campo[linha][coluna] = @campo[linha][coluna].to_s
   end
 
   attr_accessor :bombas, :campo
