@@ -11,11 +11,11 @@ describe CampoMinado do
 	  @jogo.adicionaBomba(0,2)
 	end
 
-  it  'Possui uma dimensao' do
+  it  'Testa a dimensao do campo' do
     @jogo.tamanho.should == 3
   end
 
-  it 'Cria um campo para esconder as bombas ' do
+  it 'Testa o campo criado para o usuario ver' do
     @jogo.campo.should == [["#","#","#"],["#","#","#"],["#","#","#"]]
 	end
 
@@ -24,8 +24,8 @@ describe CampoMinado do
 	  @jogo.bombas[0][2].should == "*"
 	end
 
-  it 'Testa o clique numa Bomba' do
-    @jogo.clicaCasa(2,0)
+  it 'Testa o clique numa Bomba e Fim de Jogo' do
+    @jogo.clicaCasa(2,0).should == "Acertou uma Bomba. Fim de Jogo!"
     @jogo.campo[2][0].should == "*"
   end
 

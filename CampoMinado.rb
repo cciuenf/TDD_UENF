@@ -31,6 +31,7 @@ class CampoMinado
   def clicaCasa(linha,coluna)
     if (@bombas[linha][coluna] == "*")
        @campo[linha][coluna] = "*"
+    return "Acertou uma Bomba. Fim de Jogo!"
     else
        verificaBombasAoRedor(linha,coluna)
     end
