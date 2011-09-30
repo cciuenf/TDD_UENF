@@ -37,9 +37,9 @@ describe CampoMinado do
 	end
 
   it 'Clica em uma bomba e perde o jogo' do
-    @jogo.clicaCasa(0,1).should == "Acertou uma Bomba. Fim de Jogo!"
-    @jogo.clicaCasa(3,4).should == "Acertou uma Bomba. Fim de Jogo!"
-    @jogo.clicaCasa(4,5).should == "Acertou uma Bomba. Fim de Jogo!"
+    @jogo.clicaCasa(0,1)
+    @jogo.clicaCasa(3,4)
+    @jogo.clicaCasa(4,5)
     @jogo.campo[0][1].should == "*"
     @jogo.campo[3][4].should == "*"
     @jogo.campo[4][5].should == "*"
