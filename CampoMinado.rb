@@ -34,7 +34,7 @@ class CampoMinado
   def clicaCasa(linha,coluna)
     if (@bombas[linha][coluna] == "*")
        @campo[linha][coluna] = "*"
-    return "Acertou uma Bomba. Fim de Jogo!"
+       fimDeJogo()
     else
        verificaBombasAoRedor(linha,coluna)
     end
@@ -79,6 +79,20 @@ class CampoMinado
 
  end
 
+  def fimDeJogo()
+    puts "Acertou uma Bomba. Fim de Jogo!"
+    verificaTodasAsCasas()
+    revelaTodasAsBombas()
+  end
+
+  def revelaTodasAsBombas()
+    for linha in 0..@tamanho-1
+			for coluna in 0..@tamanho-1
+        @campo[linha][coluna] = "*" if (@bombas[linha][coluna] == "*")
+      end
+	  end
+  end
+
   def visualizaCampo()
     for i in 0..tamanho-1
       p @campo[i]
@@ -95,11 +109,4 @@ class CampoMinado
   attr_reader :tamanho
 
 end
-
-teste = CampoMinado.new(6)
-puts("\n")
-teste.colocaBombasAleatoriamente()
-teste.visualizaBombas()
-puts("\n")
-#teste.verificaTodasAsCasas()
 
