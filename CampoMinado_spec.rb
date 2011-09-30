@@ -6,12 +6,12 @@ describe CampoMinado do
 
   before do
     @jogo = CampoMinado.new(6)
-    @jogo.adicionaBomba(2,0)
-	  @jogo.adicionaBomba(0,2)
-	  @jogo.adicionaBomba(3,4)
-	  @jogo.adicionaBomba(4,1)
-	  @jogo.adicionaBomba(1,4)
-	  @jogo.adicionaBomba(5,5)
+    @jogo.adicionaBomba(0,1)
+    @jogo.adicionaBomba(1,0)
+    @jogo.adicionaBomba(3,4)
+    @jogo.adicionaBomba(4,4)
+    @jogo.adicionaBomba(5,4)
+    @jogo.adicionaBomba(4,5)
 	end
 
   it  'Possui uma dimensao' do
@@ -28,26 +28,34 @@ describe CampoMinado do
 	end
 
   it 'Coloca as bombas no lugares corretos' do
-    @jogo.bombas[2][0].should == "*"
-	  @jogo.bombas[0][2].should == "*"
+    @jogo.bombas[0][1].should == "*"
+	  @jogo.bombas[1][0].should == "*"
 	  @jogo.bombas[3][4].should == "*"
-	  @jogo.bombas[4][1].should == "*"
-    @jogo.bombas[1][4].should == "*"
-	  @jogo.bombas[5][5].should == "*"
+	  @jogo.bombas[4][4].should == "*"
+    @jogo.bombas[5][4].should == "*"
+	  @jogo.bombas[4][5].should == "*"
 	end
 
   it 'Clica em uma bomba e perde o jogo' do
-    @jogo.clicaCasa(2,0).should == "Acertou uma Bomba. Fim de Jogo!"
+    @jogo.clicaCasa(0,1).should == "Acertou uma Bomba. Fim de Jogo!"
     @jogo.clicaCasa(3,4).should == "Acertou uma Bomba. Fim de Jogo!"
-    @jogo.clicaCasa(1,4).should == "Acertou uma Bomba. Fim de Jogo!"
-    @jogo.campo[2][0].should == "*"
+    @jogo.clicaCasa(4,5).should == "Acertou uma Bomba. Fim de Jogo!"
+    @jogo.campo[0][1].should == "*"
     @jogo.campo[3][4].should == "*"
-    @jogo.campo[1][4].should == "*"
+    @jogo.campo[4][5].should == "*"
   end
 
   it 'Clica em uma casa e mostra a quantidade de bombas ao redor dela' do
     @jogo.clicaCasa(3,3)
-    @jogo.campo[3][3].should == "1"
+    @jogo.campo[3][3].should == "2"
+    @jogo.clicaCasa(4,3)
+    @jogo.campo[4][3].should == "3"
+    @jogo.clicaCasa(0,0)
+    @jogo.campo[0][0].should == "2"
+    @jogo.clicaCasa(1,3)
+    @jogo.campo[1][3].should == "0"
+    @jogo.clicaCasa(2,0)
+    @jogo.campo[2][0].should == "1"
   end
 
 end

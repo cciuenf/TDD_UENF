@@ -21,6 +21,7 @@ class CampoMinado
     for linha in 0..@tamanho-1
 			for coluna in 0..@tamanho-1
 		    @campo[linha][coluna] = "#"
+			  @bombas[linha][coluna] = ""
 			end
 		end
 
@@ -40,17 +41,18 @@ class CampoMinado
   end
 
   def verificaBombasAoRedor(linha,coluna)
-    if (@campo[linha][coluna] == "#")
-    	@campo[linha][coluna] = 0
+    if (@bombas[linha][coluna] != "*")
+    	  @campo[linha][coluna] = 0
 
       for i in -1..1
 			  for j in -1..1
-			    @campo[linha][coluna] += 1 if (@bombas[linha+i][coluna+j] == "*")
+			    break if (linha+i>@tamanho-1 and i=1)
+          @campo[linha][coluna] += 1 if (@bombas[linha+i][coluna+j] == "*")
         end
       end
-
-		end
     @campo[linha][coluna] = @campo[linha][coluna].to_s
+		end
+
   end
 
  def verificaTodasAsCasas()
@@ -76,6 +78,18 @@ class CampoMinado
     end
 
  end
+
+  def visualizaCampo()
+    for i in 0..tamanho-1
+      p @campo[i]
+     end
+  end
+
+  def visualizaBombas()
+    for i in 0..tamanho-1
+      p @bombas[i]
+     end
+  end
 
   attr_accessor :bombas, :campo
   attr_reader :tamanho
