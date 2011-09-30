@@ -46,7 +46,7 @@ class CampoMinado
 
       for i in -1..1
 			  for j in -1..1
-			    break if (linha+i>@tamanho-1 and i=1)
+			    break if (linha+i>@tamanho-1 and i==1)
           @campo[linha][coluna] += 1 if (@bombas[linha+i][coluna+j] == "*")
         end
       end
@@ -66,13 +66,13 @@ class CampoMinado
  def colocaBombasAleatoriamente()
     bomba = 0
 
-    for linha in 0..@tamanho-1
-		  for coluna in 0..@tamanho-1
-        if (rand(2) == 1)
-          if (bomba <= @tamanho)
-            adicionaBomba(linha,coluna)
-            bomba += 1
-          end
+    while (bomba <= @tamanho)
+      if (bomba <= @tamanho)
+        linha = rand(@tamanho)
+        coluna = rand(@tamanho)
+        if (@bombas[linha][coluna] != "*")
+          adicionaBomba(linha,coluna)
+          bomba += 1
         end
       end
     end
@@ -95,4 +95,11 @@ class CampoMinado
   attr_reader :tamanho
 
 end
+
+teste = CampoMinado.new(6)
+puts("\n")
+teste.colocaBombasAleatoriamente()
+teste.visualizaBombas()
+puts("\n")
+#teste.verificaTodasAsCasas()
 
