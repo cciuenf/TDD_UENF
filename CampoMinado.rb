@@ -68,8 +68,8 @@ class CampoMinado
  def colocaBombasAleatoriamente()
     bomba = 0
 
-    while (bomba <= @tamanho)
-      if (bomba <= @tamanho)
+    while (bomba <= @tamanho**2/4)
+      if (bomba <= @tamanho**2/4)
         linha = rand(@tamanho)
         coluna = rand(@tamanho)
         if (@bombas[linha][coluna] != "*")
