@@ -12,6 +12,8 @@ class CampoMinado
       @campo << []
     end
 
+  criaCampo()
+
   end
 
   def criaCampo()
@@ -41,8 +43,8 @@ class CampoMinado
     if (@campo[linha][coluna] == "#")
     	@campo[linha][coluna] = 0
 
-      for linha in tamanho
-			  for coluna in -1..1
+      for i in -1..1
+			  for j in -1..1
 			    @campo[linha][coluna] += 1 if (@bombas[linha+i][coluna+j] == "*")
         end
       end
@@ -50,6 +52,14 @@ class CampoMinado
 		end
     @campo[linha][coluna] = @campo[linha][coluna].to_s
   end
+
+ def verificaTodasAsCasas()
+    @bombas.each_index do |linha|
+			@bombas[linha].each_index do |coluna|
+				verificaBombasAoRedor(linha,coluna)
+			end
+		end
+ end
 
  def colocaBombasAleatoriamente()
     bomba = 0
@@ -69,7 +79,6 @@ class CampoMinado
 
   attr_accessor :bombas, :campo
   attr_reader :tamanho
-
 
 end
 

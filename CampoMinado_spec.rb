@@ -5,33 +5,49 @@ require './CampoMinado'
 describe CampoMinado do
 
   before do
-    @jogo = CampoMinado.new(3)
-    @jogo.criaCampo()
+    @jogo = CampoMinado.new(6)
     @jogo.adicionaBomba(2,0)
 	  @jogo.adicionaBomba(0,2)
+	  @jogo.adicionaBomba(3,4)
+	  @jogo.adicionaBomba(4,1)
+	  @jogo.adicionaBomba(1,4)
+	  @jogo.adicionaBomba(5,5)
 	end
 
-  it  'Testa a dimensao do campo' do
-    @jogo.tamanho.should == 3
+  it  'Possui uma dimensao' do
+    @jogo.tamanho.should == 6
   end
 
-  it 'Testa o campo criado para o usuario ver' do
-    @jogo.campo.should == [["#","#","#"],["#","#","#"],["#","#","#"]]
+  it 'Tem um campo que esconde as bombas' do
+    @jogo.campo.should == [["#","#","#","#","#","#"],
+                           ["#","#","#","#","#","#"],
+                           ["#","#","#","#","#","#"],
+                           ["#","#","#","#","#","#"],
+                           ["#","#","#","#","#","#"],
+                           ["#","#","#","#","#","#"]]
 	end
 
-  it 'Testa se as bombas estao sendo colocadas no lugar certo' do
+  it 'Coloca as bombas no lugares corretos' do
     @jogo.bombas[2][0].should == "*"
 	  @jogo.bombas[0][2].should == "*"
+	  @jogo.bombas[3][4].should == "*"
+	  @jogo.bombas[4][1].should == "*"
+    @jogo.bombas[1][4].should == "*"
+	  @jogo.bombas[5][5].should == "*"
 	end
 
-  it 'Testa o clique numa Bomba e Fim de Jogo' do
+  it 'Clica em uma bomba e perde o jogo' do
     @jogo.clicaCasa(2,0).should == "Acertou uma Bomba. Fim de Jogo!"
+    @jogo.clicaCasa(3,4).should == "Acertou uma Bomba. Fim de Jogo!"
+    @jogo.clicaCasa(1,4).should == "Acertou uma Bomba. Fim de Jogo!"
     @jogo.campo[2][0].should == "*"
+    @jogo.campo[3][4].should == "*"
+    @jogo.campo[1][4].should == "*"
   end
 
-  it 'Testa o clique numa casa e a contagem de bombas ao redor dela' do
-    @jogo.clicaCasa(1,1)
-    @jogo.campo[1][1].should == "2"
+  it 'Clica em uma casa e mostra a quantidade de bombas ao redor dela' do
+    @jogo.clicaCasa(3,3)
+    @jogo.campo[3][3].should == "1"
   end
 
 end
