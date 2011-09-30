@@ -1,5 +1,4 @@
 # encoding: utf-8
-
 require './CampoMinado'
 
 describe CampoMinado do
@@ -37,29 +36,29 @@ describe CampoMinado do
 	end
 
   it 'Clica em uma bomba e perde o jogo' do
-    @jogo.clicaCasa(0,1)
-    @jogo.clicaCasa(3,4)
-    @jogo.clicaCasa(4,5)
+    @jogo.clicaCasa(0,1).should == true
+    @jogo.clicaCasa(3,4).should == true
+    @jogo.clicaCasa(4,5).should == true
     @jogo.campo[0][1].should == "*"
     @jogo.campo[3][4].should == "*"
     @jogo.campo[4][5].should == "*"
   end
 
   it 'Clica em uma casa e mostra a quantidade de bombas ao redor dela' do
-    @jogo.clicaCasa(3,3)
+    @jogo.clicaCasa(3,3).should == false
+    @jogo.clicaCasa(4,3).should == false
+    @jogo.clicaCasa(0,0).should == false
+    @jogo.clicaCasa(1,3).should == false
+    @jogo.clicaCasa(2,0).should == false
     @jogo.campo[3][3].should == "2"
-    @jogo.clicaCasa(4,3)
     @jogo.campo[4][3].should == "3"
-    @jogo.clicaCasa(0,0)
     @jogo.campo[0][0].should == "2"
-    @jogo.clicaCasa(1,3)
     @jogo.campo[1][3].should == "0"
-    @jogo.clicaCasa(2,0)
     @jogo.campo[2][0].should == "1"
   end
 
   it 'Clica em uma bomba e o campo eh revelado' do
-    @jogo.clicaCasa(1,0)
+    @jogo.clicaCasa(1,0).should == true
     @jogo.campo.should == [["2","*","1","1","1","1"],
                            ["*","2","1","0","0","0"],
                            ["1","1","0","1","1","1"],

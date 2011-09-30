@@ -35,8 +35,10 @@ class CampoMinado
     if (@bombas[linha][coluna] == "*")
        @campo[linha][coluna] = "*"
        fimDeJogo()
+       return true
     else
        verificaBombasAoRedor(linha,coluna)
+       return false
     end
   end
 
@@ -81,8 +83,8 @@ class CampoMinado
 
   def fimDeJogo()
     puts "Acertou uma Bomba. Fim de Jogo!"
-    verificaTodasAsCasas()
     revelaTodasAsBombas()
+    verificaTodasAsCasas()
   end
 
   def revelaTodasAsBombas()
