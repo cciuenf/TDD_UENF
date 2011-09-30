@@ -58,5 +58,15 @@ describe CampoMinado do
     @jogo.campo[2][0].should == "1"
   end
 
+  it 'Clica em uma bomba e o campo eh revelado' do
+    @jogo.clicaCasa(1,0)
+    @jogo.campo.should == [["2","*","1","1","1","1"],
+                           ["*","2","1","0","0","0"],
+                           ["1","1","0","1","1","1"],
+                           ["1","0","0","2","*","3"],
+                           ["1","0","0","3","*","*"],
+                           ["1","0","0","2","*","3"]]
+  end
+
 end
 
