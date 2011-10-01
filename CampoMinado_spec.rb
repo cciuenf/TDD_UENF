@@ -52,7 +52,11 @@ describe CampoMinado do
 
   it 'Clica em uma bomba e perde o jogo' do
     @jogo.clicaCasa(0,1)
+    @jogo.clicaCasa(3,4)
+    @jogo.clicaCasa(4,5)
     @jogo.campo[0][1].should == "*"
+    @jogo.campo[3][4].should == "*"
+    @jogo.campo[4][5].should == "*"
   end
 
   it 'Clica em uma casa e mostra a quantidade de bombas ao redor dela' do
@@ -65,17 +69,17 @@ describe CampoMinado do
     @jogo.campo[4][3].should == "3"
     @jogo.campo[0][0].should == "2"
     @jogo.campo[1][3].should == "2"
-    @jogo.campo[2][0].should == "2"
+    @jogo.campo[2][0].should == "1"
   end
 
-  it 'Clica em uma bomba e o campo eh revelado' do
+  it 'Clica em uma bomba e todas as bombas sao reveladas' do
     @jogo.clicaCasa(1,0)
-    @jogo.campo.should == [["2","*","1","1","1","1"],
+    @jogo.campo.should == [["2","*","1","0","0","0"],
                            ["*","2","2","2","3","2"],
-                           ["2","1","1","*","*","*"],
-                           ["2","0","1","4","*","5"],
-                           ["1","0","0","3","*","*"],
-                           ["1","0","0","2","*","3"]]
+                           ["1","1","1","*","*","*"],
+                           ["0","0","1","4","*","5"],
+                           ["0","0","0","3","*","*"],
+                           ["0","0","0","2","*","3"]]
   end
 
  it 'Ganha pontos clicando fora de bombas' do

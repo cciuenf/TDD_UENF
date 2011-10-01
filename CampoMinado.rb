@@ -59,12 +59,17 @@ class CampoMinado
     if (@bombas[linha][coluna] != "*")
     	  @campo[linha][coluna] = 0
 
-      for i in -1..1
-			  for j in -1..1
-			    break if (linha+i>@tamanho-1 and i==1)
-          @campo[linha][coluna] += 1 if (@bombas[linha+i][coluna+j] == "*")
-        end
-      end
+      @campo[linha][coluna] += 1 if (linha > 0 && coluna > 0 && @bombas[linha-1][coluna-1] == '*')
+      @campo[linha][coluna] += 1 if (linha > 0 && @bombas[linha-1][coluna] == '*')
+      @campo[linha][coluna] += 1 if (linha > 0 && coluna+1 < @bombas[linha].length && @bombas[linha-1][coluna+1] == '*')
+
+      @campo[linha][coluna] += 1 if (coluna > 0 && @bombas[linha][coluna-1] == '*')
+      @campo[linha][coluna] += 1 if (coluna+1 < @bombas[linha].length && @bombas[linha][coluna+1] == '*')
+
+      @campo[linha][coluna] += 1 if (linha+1 < @bombas.length && coluna > 0 && @bombas[linha+1][coluna-1] == '*')
+      @campo[linha][coluna] += 1 if (linha+1 < @bombas.length && @bombas[linha+1][coluna] == '*')
+      @campo[linha][coluna] += 1 if (linha+1 < @bombas.length && coluna+1 < @bombas[linha].length && @bombas[linha+1][coluna+1] == '*')
+
     @campo[linha][coluna] = @campo[linha][coluna].to_s
 		end
 
