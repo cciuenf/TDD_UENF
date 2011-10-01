@@ -3,7 +3,7 @@
 class CampoMinado
 
   def initialize (tamanho)
-
+    raise 'Tamanho Inválido para um Campo Minado' if ( tamanho <= 1 or tamanho > 20)
     @tamanho = tamanho
     @limiteBombas = @tamanho**2/4
     @vitoria = @tamanho.to_i**2 - @limiteBombas

@@ -110,5 +110,11 @@ describe CampoMinado do
     @jogo.vitoria.should == 26
   end
 
+  it 'Nao deve aceitar um tamanho de campo menor que 2' do
+    lambda {@jogo = CampoMinado.new(1)}.should raise_error('Tamanho Inválido para um Campo Minado')
+    lambda {@jogo = CampoMinado.new(0)}.should raise_error('Tamanho Inválido para um Campo Minado')
+    lambda {@jogo = CampoMinado.new(-1)}.should raise_error('Tamanho Inválido para um Campo Minado')
+  end
+
 end
 
