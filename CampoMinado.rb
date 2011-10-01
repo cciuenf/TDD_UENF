@@ -3,7 +3,10 @@
 class CampoMinado
 
   def initialize (tamanho)
+
     @tamanho = tamanho
+    @limiteBombas = @tamanho**2/4
+    @vitoria = @tamanho.to_i**2 - @limiteBombas
     @bombas = []
     @campo = []
 
@@ -31,14 +34,24 @@ class CampoMinado
     @bombas[linha][coluna] = "*"
   end
 
+  def ehUmaBomba?(linha,coluna)
+    if(@bombas[linha][coluna] == "*")
+      return true
+    else
+      return false
+    end
+  end
+
   def clicaCasa(linha,coluna)
     if (@bombas[linha][coluna] == "*")
        @campo[linha][coluna] = "*"
        fimDeJogo()
-       return true
+
     else
-       verificaBombasAoRedor(linha,coluna)
-       return false
+       if(@campo[linha][coluna] == "#")
+          @vitoria = @vitoria - 1
+          verificaBombasAoRedor(linha,coluna)
+      end
     end
   end
 
@@ -68,8 +81,8 @@ class CampoMinado
  def colocaBombasAleatoriamente()
     bomba = 0
 
-    while (bomba <= @tamanho**2/4)
-      if (bomba <= @tamanho**2/4)
+    while (bomba < @limiteBombas)
+      if (bomba < @limiteBombas)
         linha = rand(@tamanho)
         coluna = rand(@tamanho)
         if (@bombas[linha][coluna] != "*")
@@ -87,6 +100,16 @@ class CampoMinado
     verificaTodasAsCasas()
   end
 
+  def ganhouOJogo?()
+    if(@vitoria <= 0)
+      puts "Parabens. Vc Venceu o jogo!"
+      revelaTodasAsBombas()
+      return true
+    else
+      return false
+    end
+  end
+
   def revelaTodasAsBombas()
     for linha in 0..@tamanho-1
 			for coluna in 0..@tamanho-1
@@ -101,14 +124,8 @@ class CampoMinado
      end
   end
 
-  def visualizaBombas()
-    for i in 0..tamanho-1
-      p @bombas[i]
-     end
-  end
-
-  attr_accessor :bombas, :campo
-  attr_reader :tamanho
+  attr_accessor :bombas, :campo, :vitoria
+  attr_reader :tamanho, :limiteBombas
 
 end
 
