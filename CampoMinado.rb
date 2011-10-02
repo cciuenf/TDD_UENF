@@ -71,7 +71,6 @@ class CampoMinado
 
       else
          if(@campo[linha][coluna] == "#")
-            @vitoria = @vitoria - 1
             verificaBombasAoRedor(linha,coluna)
         end
       end
@@ -82,22 +81,34 @@ class CampoMinado
 
   def verificaBombasAoRedor(linha,coluna)
     if (@bombas[linha][coluna] != "*")
+      if (@campo[linha][coluna] == "#")
     	  @campo[linha][coluna] = 0
 
-      @campo[linha][coluna] += 1 if (linha > 0 && coluna > 0 && @bombas[linha-1][coluna-1] == '*')
-      @campo[linha][coluna] += 1 if (linha > 0 && @bombas[linha-1][coluna] == '*')
-      @campo[linha][coluna] += 1 if (linha > 0 && coluna+1 < @bombas[linha].length && @bombas[linha-1][coluna+1] == '*')
-
-      @campo[linha][coluna] += 1 if (coluna > 0 && @bombas[linha][coluna-1] == '*')
-      @campo[linha][coluna] += 1 if (coluna+1 < @bombas[linha].length && @bombas[linha][coluna+1] == '*')
-
-      @campo[linha][coluna] += 1 if (linha+1 < @bombas.length && coluna > 0 && @bombas[linha+1][coluna-1] == '*')
-      @campo[linha][coluna] += 1 if (linha+1 < @bombas.length && @bombas[linha+1][coluna] == '*')
-      @campo[linha][coluna] += 1 if (linha+1 < @bombas.length && coluna+1 < @bombas[linha].length && @bombas[linha+1][coluna+1] == '*')
-
-    @campo[linha][coluna] = @campo[linha][coluna].to_s
+        @campo[linha][coluna] += 1 if (linha > 0 && coluna > 0 && @bombas[linha-1][coluna-1] == '*')
+        @campo[linha][coluna] += 1 if (linha > 0 && @bombas[linha-1][coluna] == '*')
+        @campo[linha][coluna] += 1 if (linha > 0 && coluna+1 < @bombas[linha].length && @bombas[linha-1][coluna+1] == '*')
+        @campo[linha][coluna] += 1 if (coluna > 0 && @bombas[linha][coluna-1] == '*')
+        @campo[linha][coluna] += 1 if (coluna+1 < @bombas[linha].length && @bombas[linha][coluna+1] == '*')
+        @campo[linha][coluna] += 1 if (linha+1 < @bombas.length && coluna > 0 && @bombas[linha+1][coluna-1] == '*')
+        @campo[linha][coluna] += 1 if (linha+1 < @bombas.length && @bombas[linha+1][coluna] == '*')
+        @campo[linha][coluna] += 1 if (linha+1 < @bombas.length && coluna+1 < @bombas[linha].length && @bombas[linha+1][coluna+1] == '*')
+        @vitoria = @vitoria - 1
+        expandeAoRedor(linha,coluna) if (@campo[linha][coluna] == 0)
+        @campo[linha][coluna] = @campo[linha][coluna].to_s
+      end
 		end
 
+  end
+
+  def expandeAoRedor(linha,coluna)
+         verificaBombasAoRedor(linha-1,coluna-1) if (linha > 0 && coluna > 0)
+         verificaBombasAoRedor(linha-1,coluna)   if (linha > 0)
+         verificaBombasAoRedor(linha-1,coluna+1) if (linha > 0 && coluna+1 < @campo[linha].length)
+         verificaBombasAoRedor(linha,coluna-1)   if (coluna > 0)
+         verificaBombasAoRedor(linha,coluna+1)   if (coluna+1 < @campo[linha].length)
+         verificaBombasAoRedor(linha+1,coluna-1) if (linha+1 < @campo.length && coluna > 0)
+         verificaBombasAoRedor(linha+1,coluna)   if (linha+1 < @campo.length)
+         verificaBombasAoRedor(linha+1,coluna+1) if (linha+1 < @campo.length && coluna+1 < @campo[linha].length)
   end
 
  def verificaTodasAsCasas()

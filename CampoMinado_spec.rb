@@ -97,7 +97,17 @@ describe CampoMinado do
     @jogo.campo[2][0].should == "1"
   end
 
-  it 'Clica em uma bomba e todas as bombas sao reveladas' do
+  it 'Clica em casa sem nenhuma bomba por perto e as casas aos seu redor são reveladas' do
+    @jogo.clicaCasa(4,1)
+    @jogo.campo.should == [["#","#","#","#","#","#"],
+                           ["#","#","#","#","#","#"],
+                           ["1","1","1","#","#","#"],
+                           ["0","0","1","4","#","#"],
+                           ["0","0","0","3","#","#"],
+                           ["0","0","0","2","#","#"]]
+  end
+
+  it 'Clica em uma bomba e todas as bombas (e o campo) sao reveladas' do
     @jogo.clicaCasa(1,0)
     @jogo.campo.should == [["2","*","1","0","0","0"],
                            ["*","2","2","2","3","2"],
@@ -111,9 +121,9 @@ describe CampoMinado do
     @jogo.clicaCasa(1,2)
     @jogo.vitoria.should == 26
     @jogo.clicaCasa(5,1)
-    @jogo.vitoria.should == 25
-    @jogo.clicaCasa(3,2)
-    @jogo.vitoria.should == 24
+    @jogo.vitoria.should == 11
+    @jogo.clicaCasa(0,5)
+    @jogo.vitoria.should == 4
   end
 
  it 'Vence se clicar em todas as casas sem bombas' do
