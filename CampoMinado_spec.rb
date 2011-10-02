@@ -41,6 +41,19 @@ describe CampoMinado do
                            ["#","#","#","#","#","#"]]
 	end
 
+  it 'Permite colocar e remover bandeiras para marcar casas' do
+    @jogo.colocaUmaBandeira(5,4)
+    @jogo.colocaUmaBandeira(2,2)
+    @jogo.campo[2][2].should == 'B'
+    @jogo.campo[5][4].should == 'B'
+     @jogo.ehUmaBandeira?(5,4).should == true
+    @jogo.removeUmaBandeira(5,4)
+    @jogo.removeUmaBandeira(2,2)
+    @jogo.campo[2][2].should == '#'
+    @jogo.campo[5][4].should == '#'
+     @jogo.ehUmaBandeira?(5,4).should == false
+  end
+
   it 'Coloca as bombas no lugares corretos' do
     @jogo.bombas[0][1].should == "*"
 	  @jogo.bombas[1][0].should == "*"
@@ -115,6 +128,7 @@ describe CampoMinado do
     lambda {@jogo = CampoMinado.new(0)}.should raise_error('Tamanho Inválido para um Campo Minado')
     lambda {@jogo = CampoMinado.new(-1)}.should raise_error('Tamanho Inválido para um Campo Minado')
   end
+
 
 end
 

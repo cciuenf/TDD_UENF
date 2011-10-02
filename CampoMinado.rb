@@ -42,6 +42,26 @@ class CampoMinado
     end
   end
 
+  def ehUmaBandeira?(linha,coluna)
+    if(@campo[linha][coluna] == "B")
+      return true
+    else
+      return false
+    end
+  end
+
+  def colocaUmaBandeira(linha,coluna)
+    if(@campo[linha][coluna] == "#")
+      @campo[linha][coluna] = 'B'
+    end
+  end
+
+  def removeUmaBandeira(linha,coluna)
+    if(@campo[linha][coluna] == "B")
+      @campo[linha][coluna] = '#'
+    end
+  end
+
   def clicaCasa(linha,coluna)
     if (@bombas[linha][coluna] == "*")
        @campo[linha][coluna] = "*"
