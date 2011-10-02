@@ -54,6 +54,18 @@ describe CampoMinado do
      @jogo.ehUmaBandeira?(5,4).should == false
   end
 
+  it 'Nao permite clicar em casas com bandeiras' do
+   @jogo.colocaUmaBandeira(0,0)
+   @jogo.clicaCasa(0,0)
+   @jogo.campo[0][0].should == "B"
+  end
+
+  it 'Nao precisa colocar bandeiras em casas que ja foram visitadas' do
+   @jogo.clicaCasa(0,0)
+   @jogo.colocaUmaBandeira(0,0)
+   @jogo.campo[0][0].should == "2"
+  end
+
   it 'Coloca as bombas no lugares corretos' do
     @jogo.bombas[0][1].should == "*"
 	  @jogo.bombas[1][0].should == "*"

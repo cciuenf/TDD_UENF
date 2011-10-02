@@ -63,15 +63,20 @@ class CampoMinado
   end
 
   def clicaCasa(linha,coluna)
-    if (@bombas[linha][coluna] == "*")
-       @campo[linha][coluna] = "*"
-       fimDeJogo()
+    if (ehUmaBandeira?(linha,coluna) == false)
 
-    else
-       if(@campo[linha][coluna] == "#")
-          @vitoria = @vitoria - 1
-          verificaBombasAoRedor(linha,coluna)
+      if (@bombas[linha][coluna] == "*")
+         @campo[linha][coluna] = "*"
+         fimDeJogo()
+
+      else
+         if(@campo[linha][coluna] == "#")
+            @vitoria = @vitoria - 1
+            verificaBombasAoRedor(linha,coluna)
+        end
       end
+    else
+      puts "Retire a bandeira, se quiser clicar nessa casa!"
     end
   end
 
