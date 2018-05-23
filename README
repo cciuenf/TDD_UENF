@@ -1,8 +1,10 @@
-Trabalho da disciplina
-    Test Driven Development.
+Trabalho da disciplina: Test Driven Development.
 
-Universidade Estadual Norte Fluminense
-    UENF
+Universidade Estadual Norte Fluminense (UENF)
 
-Professor : Rodrigo Manhães
+Professor: Rodrigo Manhães
 
+Essa implementação é um bom exemplo do Anti-pattern God Class.
+Muito programadores implementam esse tipo de código quando usam uma linguagem orientada a objetos, mas não pensam orientado a objetos.
+Não é pq sabemos criar uma classe, que isso significa que estamos pensando em um solução usando o paradigma OO.
+Eu ainda pensava de forma procedural quando escrevi esse código.
